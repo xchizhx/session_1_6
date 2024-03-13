@@ -1,26 +1,39 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:ses_son_1_5/auth/domain/logInPresenter.dart';
+import 'package:ses_son_1_5/auth/presentation/pages/Holder.dart';
 import 'package:ses_son_1_5/auth/presentation/pages/signUpPage.dart';
 import 'package:ses_son_1_5/common/controllers/passwordController.dart';
 
 import '../../../common/widgets/customTextField.dart';
 
 class LogIn extends StatefulWidget{
+  const LogIn({super.key});
+  
   @override
   State<LogIn> createState() => _LogInState();
 }
 
 class _LogInState extends State<LogIn> {
+  @override
+  void initState(){
+    super.initState();
+    presenter = LogInPresenter();
+  }
 
+  late LogInPresenter presenter;
 
   var email = TextEditingController();
   var password = PasswordTextController();
   bool isRemember = false;
 
+  bool isValid = false;
 
   void onChange(_){
-
+    isValid = presenter.isValid(
+        email.text,
+        password.text);
   }
   @override
   Widget build(BuildContext context) {
@@ -42,12 +55,14 @@ class _LogInState extends State<LogIn> {
               hint: "**********@gmail.com",
               controller: email,
               onChange: onChange,
+              isValid: presenter.isValidEmail || email.text.isEmpty
             ),
             CustomTextField(
                 label: "Пароль",
                 hint: "**********",
                 controller: password,
                 onChange: onChange,
+              isValid: presenter.isValidEmail || password.text.isEmpty,
             ),
             Expanded(
                 child: Column(
@@ -56,7 +71,9 @@ class _LogInState extends State<LogIn> {
                     SizedBox(
                       width: double.infinity,
                       child: FilledButton(
-                          onPressed: (){},
+                          onPressed: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (_) => Holder()));
+                          },
                           child: Text("Войти",
                             style: Theme.of(context).textTheme.titleSmall,)
                       ),

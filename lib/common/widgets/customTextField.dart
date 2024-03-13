@@ -6,6 +6,7 @@ class CustomTextField extends StatefulWidget{
   final String label;
   final String hint;
   final TextEditingController controller;
+  final bool isValid;
   final bool enableObscure;
   final Function(String)? onChange;
 
@@ -13,9 +14,10 @@ class CustomTextField extends StatefulWidget{
     super.key,
     required this.label,
     required this.hint,
+    required this.isValid,
     required this.controller,
     this.enableObscure = false,
-    this.onChange});
+    this.onChange, });
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
