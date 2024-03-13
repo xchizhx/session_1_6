@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:ses_son_1_5/auth/presentation/pages/logIn.dart';
 import 'package:ses_son_1_5/common/controllers/passwordController.dart';
 import 'package:ses_son_1_5/common/widgets/customTextField.dart';
 
@@ -66,18 +67,24 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                       SizedBox(height: 14,),
-                      RichText(text: TextSpan(
-                          children: [
-                            TextSpan(
-                                text: "У меня уже есть аккаунт!",
-                                style: Theme.of(context).textTheme.titleMedium),
-                            TextSpan(
-                              text: "Войти",
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                color: const Color.fromARGB(255, 106, 139, 249)
-                              )
-                            )
-                          ])),
+                       GestureDetector(
+                         onTap: (){
+                           Navigator.of(context).push(MaterialPageRoute(
+                               builder: (_) => LogIn()));
+                         },
+                         child: RichText(text: TextSpan(
+                              children: [
+                                TextSpan(
+                                    text: "У меня уже есть аккаунт! ",
+                                    style: Theme.of(context).textTheme.titleMedium),
+                                TextSpan(
+                                  text: "Войти",
+                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: const Color.fromARGB(255, 106, 139, 249)
+                                  )
+                                )
+                              ])),
+                       ),
                       SizedBox(height: 32,)
                     ],)
             )
